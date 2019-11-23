@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int super_digit(long long int P)
+{
+    if(P/10==0)
+        return P;
+    long long int sum=0;
+    while(P!=0)
+        {
+        sum=sum+(P%10);
+        P=P/10;
+        }
+
+        return super_digit(sum);
+
+}
+int main()
+{
+    int k;
+    long int n;
+    double p=0;
+    scanf("%ld %d",&n,&k);
+    while(n!=0)
+        {
+        p=p+(n%10);
+        n=n/10;
+        }
+    p=p*k;
+    printf("%d",super_digit(p));
+    return 0;
+
+}
