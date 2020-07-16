@@ -1,0 +1,148 @@
+Problem 1:
+
+#include<stdio.h>
+int main()
+{
+    int i,j,sum,shelf[3][4]={{3,4,5,7},{2,4,1,8},{3,3,2,1}},sum_row[3],array[]={3,5,7},pos[3];
+
+    for(i=0;i<3;i++)
+    {
+        sum=0;
+        for(j=0;j<4;j++)
+        {
+            sum=sum+shelf[i][j];
+        }
+        sum_row[i]=sum;
+    }
+    int max=sum_row[0],min=sum_row[0];
+    pos[0]=1,pos[2]=1;
+    for(i=1;i<3;i++)
+    {
+        if(sum_row[i]>max)
+        {
+            max=sum_row[i];
+            pos[0]=i+1;
+        }
+    }
+    for(i=0;i<3;i++)
+    {
+        if(sum_row[i]<min)
+        {
+            min=sum_row[i];
+            pos[2]=i+1;
+        }
+    }
+    if(pos[0]>pos[2])
+        pos[1]=pos[0]-pos[2];
+    else
+        pos[1]=pos[2]-pos[0];
+    for(i=0;i<3;i++)
+    printf("%d need to place shelf no %d.\n",array[i],pos[i]);
+    return 0;
+}
+
+
+
+Problem 2:
+
+
+#include<stdio.h>
+int row_hi(int array[],int size)
+{
+    int i,hi=array[0];
+    for(i=0;i<size;i++)
+    {
+        if(array[i]>hi)
+        {
+            hi=array[i];
+        }
+    }
+    return hi;
+}
+int row_lo(int array[],int size)
+{
+    int i,lo=array[0];
+    for(i=0;i<size;i++)
+    {
+        if(array[i]<lo)
+        {
+            lo=array[i];
+        }
+    }
+    return lo;
+}
+int col_hi(int array[],int size)
+{
+    int i,hi=array[0];
+    for(i=0;i<size;i++)
+    {
+        if(array[i]>hi)
+        {
+            hi=array[i];
+        }
+    }
+    return hi;
+}
+int col_lo(int array[],int size)
+{
+    int i,lo=array[0];
+    for(i=0;i<size;i++)
+    {
+
+        if(array[i]<lo)
+        {
+            lo=array[i];
+        }
+    }
+    return lo;
+}
+
+int main()
+{
+    int i,j,sum,m,n;
+    printf("Enter number of row : ");
+    scanf("%d",&m);
+    printf("Enter number of column : ");
+    scanf("%d",&n);
+    int array[m][n],sum_row[m],sum_col[n];
+    printf("Enter %dx%d array values :\n",m,n);
+    for(i=0;i<m;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            scanf("%d",&array[i][j]);
+        }
+    }
+    for(i=0;i<m;i++)
+    {
+        sum=0;
+        for(j=0;j<n;j++)
+        {
+            sum=sum+array[i][j];
+        }
+        sum_row[i]=sum;
+    }
+    for(i=0;i<n;i++)
+    {
+        sum=0;
+        for(j=0;j<m;j++)
+        {
+            sum=sum+array[j][i];
+        }
+        sum_col[i]=sum;
+    }
+    printf("Sum of Rows:\n");
+    for(i=0;i<m;i++)
+    {
+        printf("\t\t%d\n",sum_row[i]);
+    }
+    printf("Sum of Columns:\n");
+    for(i=0;i<n;i++)
+    {
+        printf("\t\t%d\n",sum_col[i]);
+    }
+    printf("Highest and lowest value of row : %d %d\n",row_hi(sum_row,m),row_lo(sum_row,m));
+    printf("Highest and lowest value of column : %d %d\n",col_hi(sum_col,n),col_lo(sum_col,n));
+    return 0;
+}
+
